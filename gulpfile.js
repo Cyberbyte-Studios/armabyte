@@ -15,6 +15,8 @@ require('laravel-elixir-vue-2');
 
 elixir((mix) => {
     mix.less(['app.less'])
+        .copy('node_modules/icheck/skins/square/blue.png', 'public/css/checkboxes/blue.png')
+        .copy('node_modules/icheck/skins/square/blue@2x.png', 'public/css/checkboxes/blue@2x.png')
         .webpack('app.js')
         .version(['css/app.css', 'js/app.js']);
 });
