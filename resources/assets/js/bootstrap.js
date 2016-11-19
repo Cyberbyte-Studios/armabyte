@@ -9,8 +9,6 @@ window._ = require('lodash');
 window.$ = window.jQuery = require('jquery');
 require('bootstrap-sass');
 
-require('./theme.js');
-
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
  * using reactive data binding and reusable components. Vue's API is clean
@@ -46,3 +44,12 @@ Vue.http.interceptors.push((request, next) => {
 // });
 
 require('icheck');
+// require('pace-progress'); // https://github.com/HubSpot/pace/issues/328
+require('fastclick');
+require('slimscroll');
+// require('inputmask'); // https://github.com/RobinHerbots/Inputmask/issues/1308
+// require('jquery.inputmask');
+require('datatables.net-bs');
+require('datatables.net-responsive-bs');
+
+require('./theme.js');

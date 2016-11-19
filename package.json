@@ -17,6 +17,13 @@
   },
   "dependencies": {
     "bootstrap-less": "^3.3.8",
-    "icheck": "^1.0.2"
+    "datatables.net-bs": "^1.10.12",
+    "datatables.net-responsive-bs": "^2.1.0",
+    "fastclick": "^1.0.6",
+    "icheck": "^1.0.2",
+    "jquery.inputmask": "^3.3.3",
+    "pace-js": "^1.0.2",
+    "pace-progress": "^1.0.2",
+    "slimscroll": "^0.9.1"
   }
 }
