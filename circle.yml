@@ -11,14 +11,15 @@ dependencies:
     - gulp
   cache_directories:
     - vendor
-    - /usr/lib/node_modules
+    - /opt/circleci/nodejs/v4.2.6/bin/yarn
+    - /opt/circleci/nodejs/v4.2.6/bin/gulp
 
 test:
   override:
     - mkdir -p $CIRCLE_TEST_REPORTS/phpunit
     - phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml tests
     - mkdir -p $CIRCLE_ARTIFACTS/logs
-    - cp storage/logs/*.log $CIRCLE_ARTIFACTS/logs
+    - cp storage/logs/*.log $CIRCLE_ARTIFACTS/logs 2>/dev/null
 
 deployment:
   bundle:
