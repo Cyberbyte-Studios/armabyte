@@ -5,7 +5,7 @@ machine:
 dependencies:
   override:
     - npm install yarn
-    - yarn
+    - node_modules/yarn/bin/yarn
     - cp .env.test .env
     - gulp
   cache_directories:
