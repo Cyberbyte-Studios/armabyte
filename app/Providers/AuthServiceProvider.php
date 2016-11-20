@@ -26,5 +26,13 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Passport::routes();
+
+        Passport::tokensCan([
+            'view-self' => 'Can view there own player',
+            'view-players' => 'Can view players',
+            'edit-players' => 'Can edit players',
+            'edit-staff' => 'Can edit staff',
+            'rcon' => 'Can issue rcon commands',
+        ]);
     }
 }
