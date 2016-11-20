@@ -1,3 +1,4 @@
+!.gitignore
 /node_modules
 /public/storage
 /storage/*.key
@@ -9,6 +10,7 @@ Homestead.yaml
 .phpstorm.meta.php
 _ide_helper.php
 logs
+!storage/logs/.gitignore
 
 public/css/*
 public/js/*
