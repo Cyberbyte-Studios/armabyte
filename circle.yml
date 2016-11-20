@@ -15,8 +15,8 @@ dependencies:
 
 database:
   post:
-    - php artisan passport:install
     - php artisan migrate --seed
+    - php artisan passport:install
 
 test:
   override:
