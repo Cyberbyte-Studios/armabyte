@@ -13,10 +13,13 @@ dependencies:
     - vendor
     - /opt/circleci/nodejs/v4.2.6/bin/yarn
 
-test:
-  override:
+database:
+  post:
     - php artisan passport:install
     - php artisan migrate --seed
+
+test:
+  override:
     - touch storage/logs/laravel.log
     - mkdir -p $CIRCLE_TEST_REPORTS/phpunit; mkdir -p $CIRCLE_ARTIFACTS/logs
     - phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml tests
