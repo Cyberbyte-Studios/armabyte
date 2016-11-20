@@ -14,7 +14,8 @@ class PlayerUpdateRequest extends Request
     public function rules(): array
     {
         return [
-            'uid' => 'required'
+            'uid' => 'required',
+            'name' => 'required'
         ];
     }
 }

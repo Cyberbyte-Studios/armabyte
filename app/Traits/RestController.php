@@ -3,13 +3,15 @@
 namespace App\Traits;
 
 use App\Http\Requests\RestRequest;
+use Illuminate\Database\Eloquent\Collection;
 use Prettus\Repository\Criteria\RequestCriteria;
+use App\Modules\ArmaLife\Repositories\ArmaLifeRepository;
 
 trait RestController
 {
     protected $repository;
 
-    public function __construct($repository)
+    public function __construct(ArmaLifeRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -20,12 +22,12 @@ trait RestController
         return $this->repository->all();
     }
 
-    public function show(int $id)
+    public function show($id)
     {
         return $this->repository->find($id);
     }
 
-    public function update(RestRequest $request, int $id)
+    public function update(RestRequest $request, $id)
     {
         return $this->repository->update($request->all(), $id);
     }
@@ -33,5 +35,15 @@ trait RestController
     public function destroy(int $id): int
     {
         return $this->repository->delete($id);
+    }
+
+    public function audits(): Collection
+    {
+        return $this->repository->audit();
+    }
+
+    public function audit($id): Collection
+    {
+        return $this->repository->audit()->find($id);
     }
 }

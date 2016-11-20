@@ -4,7 +4,6 @@ namespace App\Modules\ArmaLife\Repositories\Eloquent;
 
 use App\Modules\ArmaLife\Models\House;
 use App\Modules\ArmaLife\Presenters\HousePresenter;
-use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Modules\ArmaLife\Repositories\HouseRepository as HouseInterface;
 
@@ -12,7 +11,7 @@ use App\Modules\ArmaLife\Repositories\HouseRepository as HouseInterface;
  * Class HouseRepository
  * @package namespace App\Modules\ArmaLife\Repositories;
  */
-class HouseRepository extends BaseRepository implements HouseInterface
+class HouseRepository extends ArmaLifeRepository implements HouseInterface
 {
     /**
      * Specify Model class name
@@ -36,9 +35,4 @@ class HouseRepository extends BaseRepository implements HouseInterface
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
-    public function count()
-    {
-        return $this->model->count();
-    }    
 }
