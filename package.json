@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "bootstrap-less": "^3.3.8",
+    "chartjs": "^0.3.24",
     "datatables.net-bs": "^1.10.12",
     "datatables.net-responsive-bs": "^2.1.0",
     "fastclick": "^1.0.6",

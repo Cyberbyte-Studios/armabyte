@@ -49,6 +49,7 @@ require('fastclick');
 require('slimscroll');
 // require('inputmask'); // https://github.com/RobinHerbots/Inputmask/issues/1308
 // require('jquery.inputmask');
+require('chartjs');
 require('datatables.net-bs');
 require('datatables.net-responsive-bs');
 
