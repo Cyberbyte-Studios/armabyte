@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="ArmaByte" basedir="."  default="test">
+
+    <property name="builddir" value="build" />
+    <property name="source" value="app" />
+    <property name="testdir" value="tests" />
+
+    <fileset id="php-files" dir="${project.basedir}">
+        <include name="app/**/*.php"/>
+        <!--<exclude name="tests/**"/>-->
+    </fileset>
+
+    <target name="test">
+        <phpunit codecoverage="true">
+            <batchtest>
+                <fileset dir="src">
+                    <include name="*Test.php"/>
+                </fileset>
+            </batchtest>
+        </phpunit>
+    </target>
+
+    <target name="test-config">
+        <echo msg="Copying testConfig" />
+        <move file=".env.test" tofile=".env" overwrite="true"/>
+    </target>
+
+    <target name="bundle">
+        <echo msg="Optimizing Bundle" />
+
+        <exec command="gulp" passthru="true" />
+        <exec command="php artisan clear-compiled" passthru="true" />
+        <exec command="php artisan route:cache" passthru="true" />
+        <exec command="php artisan passport:install" passthru="true" />
+
+        <zip destfile="armabyte.zip">
+            <fileset dir=".">
+                <include name="**/**" />
+                <exclude name=".git/**" />
+                <exclude name="node_modules/**" />
+            </fileset>
+        </zip>
+
+        <echo msg="Done! All ready" />
+    </target>
+</project>
