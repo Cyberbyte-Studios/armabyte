@@ -13,18 +13,16 @@ dependencies:
     - vendor
     - /usr/lib/node_modules
 
+test:
+  override:
+    - mkdir -p $CIRCLE_TEST_REPORTS/phpunit
+    - phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml tests
+    - mkdir -p $CIRCLE_ARTIFACTS/logs
+    - cp storage/logs/*.log $CIRCLE_ARTIFACTS/logs
+
 deployment:
-  production:
-    branch: master
+  bundle:
+    branch: [master, develop]
     commands:
       - vendor/bin/phing bundle
-
-  staging:
-    branch: develop
-    commands:
-      - vendor/bin/phing bundle
-
-general:
-  artifacts:
-    - "storage/logs"
-    - "armabyte.zip"
+      - mv armabyte.zip $CIRCLE_ARTIFACTS/
