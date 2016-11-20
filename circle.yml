@@ -5,6 +5,7 @@ machine:
 dependencies:
   override:
     - npm install -g yarn
+    - npm install -g gulp
     - yarn
     - cp .env.test .env
     - gulp
