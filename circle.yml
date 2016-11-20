@@ -5,7 +5,20 @@ machine:
 dependencies:
   post:
     - cp .env.test .env
+    - gulp
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - vendor/bin/phing bundle
+
+  staging:
+    branch: develop
+    commands:
+      - vendor/bin/phing bundle
 
 general:
   artifacts:
     - "storage/logs"
+    - "armabyte.zip"
