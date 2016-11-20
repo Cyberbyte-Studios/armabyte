@@ -9,3 +9,9 @@ Homestead.yaml
 .phpstorm.meta.php
 _ide_helper.php
 logs
+
+public/css/*
+public/js/*
+public/fonts/*
+public/build/*
+public/img/checkboxes/*

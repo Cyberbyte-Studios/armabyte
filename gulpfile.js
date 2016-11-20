@@ -14,9 +14,12 @@ require('laravel-elixir-vue-2');
  */
 
 elixir((mix) => {
-    mix.less(['app.less'])
-        .copy('node_modules/icheck/skins/square/blue.png', 'public/css/checkboxes/blue.png')
-        .copy('node_modules/icheck/skins/square/blue@2x.png', 'public/css/checkboxes/blue@2x.png')
+    mix.sass('app.scss', 'public/css/plugins.css')
+        .less('app.less', 'public/css/theme.css')
+        .copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/fonts/bootstrap')
+        .copy('node_modules/font-awesome/fonts', 'public/fonts/font-awesome')
+        .copy('node_modules/ionicons/dist/fonts', 'public/fonts/ionicons')
+        .copy('node_modules/icheck/skins/square/*.png', 'public/img/checkboxes')
         .webpack('app.js')
-        .version(['css/app.css', 'js/app.js']);
+        .version(['css/plugins.css', 'css/theme.css', 'js/app.js']);
 });
