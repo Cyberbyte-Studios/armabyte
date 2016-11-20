@@ -1,16 +1,121 @@
 version: '2'
 
 services:
-  mariadb:
-    image: mariadb
-    environment:
-      MYSQL_DATABASE: "armalife"
-      MYSQL_USER: "armalife"
-      MYSQL_PASSWORD: "armalife"
-      MYSQL_ROOT_PASSWORD: "armalife"
-    volumes:
-      - data:/var/lib/mysql
+    applications:
+        image: tianon/true
+        volumes:
+            - .:/var/www
+
+    workspace:
+        build:
+            context: laradock/workspace
+            args:
+                - INSTALL_XDEBUG=true
+                - INSTALL_NODE=true
+                - INSTALL_YARN=true
+                - COMPOSER_GLOBAL_INSTALL=true
+                - INSTALL_AEROSPIKE_EXTENSION=false
+                - PUID=1000
+                - PGID=1000
+                - NODE_VERSION=stable
+                - TZ=GMT
+        volumes_from:
+            - applications
+        extra_hosts:
+            # IMPORTANT: Replace with your Docker Host IP (will be appended to /etc/hosts)
+            - "dockerhost:10.0.75.1"
+        ports:
+           - "2222:22"
+        tty: true
+
+    php-fpm:
+        build:
+            context: laradock/php-fpm
+            dockerfile: Dockerfile-70
+            args:
+                - INSTALL_XDEBUG=true
+        volumes_from:
+            - applications
+        expose:
+            - "9000"
+        links:
+            - workspace
+        extra_hosts:
+            # IMPORTANT: Replace with your Docker Host IP (will be appended to /etc/hosts)
+            - "dockerhost:10.0.75.1"
+        environment:
+            # IMPORTANT: Set the Remote Interpreter entry matching name to `laravel`
+            - PHP_IDE_CONFIG=serverName=laravel
+            - INSTALL_AEROSPIKE_EXTENSION=false
+
+    nginx:
+        build:
+            context: laradock/nginx
+            args:
+                - PHP_UPSTREAM=php-fpm
+        volumes_from:
+            - applications
+        volumes:
+            - ./logs/nginx/:/var/log/nginx
+        ports:
+            - "80:80"
+            - "443:443"
+        links:
+            - php-fpm
+
+    mariadb:
+        build: laradock/mariadb
+        volumes:
+            - mysql:/var/lib/mysql
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: homestead
+            MYSQL_USER: homestead
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: root
+
+    redis:
+        build: laradock/redis
+        volumes:
+            - redis:/data
+        ports:
+            - "6379:6379"
+
+    beanstalkd:
+        build: laradock/beanstalkd
+        ports:
+            - "11300:11300"
+        privileged: true
+        links:
+            - php-fpm
+
+    beanstalkd-console:
+        build: laradock/beanstalkd-console
+        ports:
+            - "2080:2080"
+        links:
+            - beanstalkd
+
+    elasticsearch:
+        build: laradock/elasticsearch
+        volumes:
+            - elasticsearch-data:/usr/share/elasticsearch/data
+            - elasticsearch-pkugins:/usr/share/elasticsearch/data
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+        links:
+            - php-fpm
 
 volumes:
-  data:
-    driver: local
+    redis:
+        driver: "local"
+    mysql:
+        driver: "local"
+    elasticsearch-data:
+        driver: "local"
+    elasticsearch-pkugins:
+        driver: "local"
+    sessions:    ## nothing is connected to this (- ./data/sessions:/sessions)
+        driver: "local"
