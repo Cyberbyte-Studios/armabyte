@@ -1,8 +1,28 @@
+machine:
+  php:
+    version: 7.0.11
+
 dependencies:
   override:
+    - npm install -g yarn
     - yarn
     - composer install
+    - cp .env.test .env
+    - node_modules/gulp/bin/gulp.js
+  cache_directories:
+    - vendor
+    - /opt/circleci/nodejs/v4.2.6/bin/yarn
 
-machine:
-  environment:
-    DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
+test:
+  override:
+    - touch storage/logs/laravel.log
+    - mkdir -p $CIRCLE_TEST_REPORTS/phpunit; mkdir -p $CIRCLE_ARTIFACTS/logs
+    - phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml tests
+    - cp storage/logs/*.log $CIRCLE_ARTIFACTS/logs
+
+deployment:
+  bundle:
+    branch: [master, develop]
+    commands:
+      - vendor/bin/phing bundle
+      - mv armabyte.zip $CIRCLE_ARTIFACTS/
