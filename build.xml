@@ -38,6 +38,7 @@
                 <include name="**/**" />
                 <exclude name=".git/**" />
                 <exclude name="node_modules/**" />
+                <exclude name=".env" />
             </fileset>
         </zip>
 
