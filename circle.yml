@@ -9,13 +9,13 @@ dependencies:
     - composer install
     - cp .env.test .env
     - node_modules/gulp/bin/gulp.js
-    - php artisan passport:install
   cache_directories:
     - vendor
     - /opt/circleci/nodejs/v4.2.6/bin/yarn
 
 database:
   pre:
+    - php artisan passport:install
     - php artisan migrate --seed
 
 test:
