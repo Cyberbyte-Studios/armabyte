@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'armabyte'),
 
     /*
     |--------------------------------------------------------------------------
@@ -45,6 +45,27 @@ return [
     */
 
     'connections' => [
+
+        'armabyte' => [
+            'driver' => 'sqlite',
+            'database' => env('DB_DATABASE', database_path('armabyte.sqlite')),
+            'prefix' => '',
+        ],
+
+        'armalife' => [
+            'driver' => 'mysql',
+            'host' => env('ARMALIFE_HOST', '127.0.0.1'),
+            'port' => env('ARMALIFE_PORT', '3306'),
+            'database' => env('ARMALIFE_DATABASE', 'forge'),
+            'username' => env('ARMALIFE_USERNAME', 'forge'),
+            'password' => env('ARMALIFE_PASSWORD', ''),
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
 
         'sqlite' => [
             'driver' => 'sqlite',
