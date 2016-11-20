@@ -4,10 +4,10 @@
     <div class="login-box-body">
         <p class="login-box-msg">Register now</p>
 
-        <form role="form" method="POST" action="{{ url('/login') }}">
+        <form role="form" method="POST" action="{{ url('/register') }}">
             {{ csrf_field() }}
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} has-feedback">
-                <input id="name" type="text" class="form-control" name="bane" value="{{ old('name') }}" placeholder="Name" required autofocus>
+                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Name" required autofocus>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 @if ($errors->has('name'))
                     <span class="help-block">
@@ -25,7 +25,7 @@
                 @endif
             </div>
             <div class="form-group{{ $errors->has('steam_id') ? ' has-error' : '' }} has-feedback">
-                <input id="name" type="text" class="form-control" name="bane" value="{{ old('steam_id') }}" placeholder="Steam Id" autofocus>
+                <input id="steam-id" type="text" class="form-control" name="steam_id" value="{{ old('steam_id') }}" placeholder="Steam Id" autofocus>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 @if ($errors->has('steam_id'))
                     <span class="help-block">
