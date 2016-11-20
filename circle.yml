@@ -13,6 +13,11 @@ dependencies:
     - vendor
     - /opt/circleci/nodejs/v4.2.6/bin/yarn
 
+database:
+  post:
+    - php artisan migrate --seed
+    - php artisan passport:install
+
 test:
   override:
     - touch storage/logs/laravel.log
