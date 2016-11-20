@@ -4,7 +4,8 @@ machine:
 
 dependencies:
   post:
-    - composer install
     - cp .env.test .env
-  cache_directories:
-    - vendor
+
+general:
+  artifacts:
+    - "storage/logs"
