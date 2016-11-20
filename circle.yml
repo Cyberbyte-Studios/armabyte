@@ -3,9 +3,13 @@ machine:
     version: 7.0.11
 
 dependencies:
-  post:
+  override:
+    - npm install yarn
+    - yarn
     - cp .env.test .env
     - gulp
+  cache_directories:
+    - vendor
 
 deployment:
   production:
