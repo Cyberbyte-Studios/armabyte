@@ -3,9 +3,12 @@
 namespace App\Modules\ArmaLife\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Auditable;
 
 class Player extends Model
 {
+    use Auditable;
+
     protected $fillable = array(
         'name', 'aliases', 'cash', 'bankacc', 'coplevel', 'mediclevel', 'civ_licenses', 'cop_licenses',
         'med_licenses', 'civ_gear', 'cop_gear', 'med_gear', 'civ_stats', 'cop_stats', 'med_stats',

@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Modules\ArmaLife\Http\Requests;
+namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
-class VehicleUpdateRequest extends Request
+class RestRequest extends Request
 {
     public function authorize(): bool
     {
