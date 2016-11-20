@@ -4,13 +4,14 @@ machine:
 
 dependencies:
   override:
-    - npm install -g yarn
-    - npm install -g gulp
+    - npm install -g yarn gulp
     - yarn
+    - composer install
     - cp .env.test .env
     - gulp
   cache_directories:
     - vendor
+    - /usr/lib/node_modules
 
 deployment:
   production:
