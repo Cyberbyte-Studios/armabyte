@@ -16,10 +16,11 @@ dependencies:
 
 test:
   override:
+    - touch storage/logs/laravel.log
     - mkdir -p $CIRCLE_TEST_REPORTS/phpunit
     - phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml tests
     - mkdir -p $CIRCLE_ARTIFACTS/logs
-    - cp storage/logs/*.log $CIRCLE_ARTIFACTS/logs 2>/dev/null
+    - cp storage/logs/*.log $CIRCLE_ARTIFACTS/logs
 
 deployment:
   bundle:
