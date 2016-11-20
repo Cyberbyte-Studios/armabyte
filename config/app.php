@@ -169,6 +169,7 @@ return [
 
         Laravel\Passport\PassportServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Caffeinated\Modules\ModulesServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -228,7 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-
+        'Module' => Caffeinated\Modules\Facades\Module::class,
     ],
 
 ];

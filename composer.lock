@@ -4,9 +4,63 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aa0e90b74592b5c423effec40f1e8fc1",
-    "content-hash": "0c9007e8d733106192eea25b97019941",
+    "hash": "e2f10456c0afa3e3d943e022f904cad0",
+    "content-hash": "a27136ea19615b903ad6047c20aff11a",
     "packages": [
+        {
+            "name": "caffeinated/modules",
+            "version": "v4.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/caffeinated/modules.git",
+                "reference": "4005675dafbd68ffd97d97d3057734670177fc22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/caffeinated/modules/zipball/4005675dafbd68ffd97d97d3057734670177fc22",
+                "reference": "4005675dafbd68ffd97d97d3057734670177fc22",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "5.3.*",
+                "illuminate/database": "5.3.*",
+                "illuminate/filesystem": "5.3.*",
+                "illuminate/routing": "5.3.*",
+                "illuminate/support": "5.3.*",
+                "php": ">=5.6.4"
+            },
+            "suggest": {
+                "wikimedia/composer-merge-plugin": "Allows the ability to create and merge composer.json files for your individual modules for module-specific dependency management."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Caffeinated\\Modules\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shea Lewis",
+                    "email": "shea.lewis89@gmail.com"
+                }
+            ],
+            "description": "Laravel 5 Modules",
+            "keywords": [
+                "caffeinated",
+                "laravel",
+                "modules"
+            ],
+            "time": "2016-11-08 03:46:11"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
