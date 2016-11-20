@@ -4,22 +4,20 @@ machine:
 
 dependencies:
   override:
-    - npm install -g yarn gulp
+    - npm install -g yarn
     - yarn
     - composer install
     - cp .env.test .env
-    - gulp
+    - node_modules/gulp/bin/gulp.js
   cache_directories:
     - vendor
     - /opt/circleci/nodejs/v4.2.6/bin/yarn
-    - /opt/circleci/nodejs/v4.2.6/bin/gulp
 
 test:
   override:
     - touch storage/logs/laravel.log
-    - mkdir -p $CIRCLE_TEST_REPORTS/phpunit
+    - mkdir -p $CIRCLE_TEST_REPORTS/phpunit; mkdir -p $CIRCLE_ARTIFACTS/logs
     - phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml tests
-    - mkdir -p $CIRCLE_ARTIFACTS/logs
     - cp storage/logs/*.log $CIRCLE_ARTIFACTS/logs
 
 deployment:
