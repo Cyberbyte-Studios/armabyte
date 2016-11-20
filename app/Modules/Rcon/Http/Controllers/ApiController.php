@@ -14,7 +14,11 @@ class ApiController
     {
         try {
             $rcon = $this->connect();
-            return $rcon->getBEServerVersion();
+            $timeStart = microtime();
+            $version = $rcon->getBEServerVersion();
+            $timeEnd = microtime();
+            $time = $timeEnd - $timeStart;
+            return $this->handleSuccess($version, ['time' => $time]);
         } catch (Exception $exception) {
             return $this->handleException($exception);
         }
@@ -24,7 +28,7 @@ class ApiController
     {
         try {
             $rcon = $this->connect();
-            return $rcon->getPlayersArray();
+            return $this->handleSuccess($rcon->getPlayersArray());
         } catch (Exception $exception) {
             return $this->handleException($exception);
         }
@@ -34,7 +38,7 @@ class ApiController
     {
         try {
             $rcon = $this->connect();
-            return $rcon->getBansArray();
+            return $this->handleSuccess($rcon->getBansArray());
         } catch (Exception $exception) {
             return $this->handleException($exception);
         }
@@ -47,7 +51,7 @@ class ApiController
         }
         try {
             $rcon = $this->connect();
-            return $rcon->banPlayer($player, $reason, $time);
+            return $this->handleSuccess($rcon->banPlayer($player, $reason, $time));
         } catch (Exception $exception) {
             return $this->handleException($exception);
         }
@@ -60,7 +64,7 @@ class ApiController
         }
         try {
             $rcon = $this->connect();
-            return $rcon->banPlayer($player, $reason, $time);
+            return $this->handleSuccess($rcon->banPlayer($player, $reason, $time));
         } catch (Exception $exception) {
             return $this->handleException($exception);
         }
@@ -70,7 +74,7 @@ class ApiController
     {
         try {
             $rcon = $this->connect();
-            return $rcon->removeBan($banId);
+            return $this->handleSuccess($rcon->removeBan($banId));
         } catch (Exception $exception) {
             return $this->handleException($exception);
         }
@@ -80,7 +84,7 @@ class ApiController
     {
         try {
             $rcon = $this->connect();
-            return $rcon->sayGlobal($message);
+            return $this->handleSuccess($rcon->sayGlobal($message));
         } catch (Exception $exception) {
             return $this->handleException($exception);
         }
@@ -90,7 +94,7 @@ class ApiController
     {
         try {
             $rcon = $this->connect();
-            return $rcon->sayPlayer($player, $message);
+            return $this->handleSuccess($rcon->sayPlayer($player, $message));
         } catch (Exception $exception) {
             return $this->handleException($exception);
         }
@@ -103,12 +107,12 @@ class ApiController
 
     protected function connect()
     {
-        return new ARC('127.0.0.1', 'password');
+        return new ARC('ourlegion.co.uk', 'scollins', 2326);
     }
 
-    protected function handleSuccess($response)
+    protected function handleSuccess($response, array $extra = [])
     {
-        return ['executed' => false, 'response' => $response];
+        return array_merge(['executed' => true, 'response' => $response], $extra);
     }
 
     protected function handleException(Exception $exception)
