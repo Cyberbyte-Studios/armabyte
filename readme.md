@@ -1,5 +1,5 @@
 # Armabyte
-
+![Circle CI](https://circleci.com/gh/Cyberbyte-Studios/armabyte/tree/develop.svg?style=svg&circle-token=cf187326a72149ab0d39c9cc52a58e225be22048)
 ## Getting started
 
 Checking out and installing dependancies
