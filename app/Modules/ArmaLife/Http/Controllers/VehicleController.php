@@ -14,4 +14,9 @@ class VehicleController extends Controller
     {
         $this->repository = $repository;
     }
+
+    public function all()
+    {
+        return $this->repository->allDataTable();
+    }
 }

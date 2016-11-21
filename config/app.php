@@ -171,6 +171,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Caffeinated\Modules\ModulesServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
 
         /*
          * Application Service Providers...

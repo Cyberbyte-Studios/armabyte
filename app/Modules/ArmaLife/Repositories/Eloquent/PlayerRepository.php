@@ -7,6 +7,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Modules\ArmaLife\Presenters\PlayerPresenter;
 use App\Modules\ArmaLife\Repositories\PlayerRepository as PlayerInterface;
+use Yajra\Datatables\Facades\Datatables;
 
 /**
  * Class PlayerRepository
@@ -76,5 +77,10 @@ class PlayerRepository extends BaseRepository implements PlayerInterface
     public function count()
     {
         return $this->model->count();
+    }
+
+    public function allDataTable()
+    {
+        return Datatables::of($this->model->all('uid', 'name', 'playerid','cash','bankacc', 'coplevel', 'mediclevel', 'donorlevel', 'adminlevel'))->make();
     }
 }

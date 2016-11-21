@@ -12,8 +12,8 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::group(['prefix' => 'armalife', 'middleware' => 'auth:api'], function() {
+//, 'middleware' => 'auth:api'
+Route::group(['prefix' => 'armalife'], function() {
     Route::get('dashboard', 'ArmaLifeController@dashboard');
     Route::resource('player', PlayerController::class);
     Route::resource('vehicle', VehicleController::class);
@@ -21,4 +21,8 @@ Route::group(['prefix' => 'armalife', 'middleware' => 'auth:api'], function() {
     Route::resource('container', ContainerController::class);
     Route::resource('wanted', WantedController::class);
     Route::resource('gang', GangController::class);
+    Route::group(['prefix' => 'datatable'], function () {
+        Route::get('players', 'PlayerController@all');
+        Route::get('vehicles', 'VehicleController@all');
+    });
 });

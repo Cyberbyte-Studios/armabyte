@@ -19,4 +19,9 @@ class PlayerController
     {
         return $this->repository->update($request->all(), $id);
     }
+
+    public function all()
+    {
+        return $this->repository->allDataTable();
+    }
 }

@@ -23,4 +23,6 @@ interface PlayerRepository extends RepositoryInterface
     public function admins();
     
     public function donators();
+
+    public function allDataTable();
 }

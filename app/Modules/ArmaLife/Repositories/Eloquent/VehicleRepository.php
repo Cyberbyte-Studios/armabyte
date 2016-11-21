@@ -2,10 +2,12 @@
 
 namespace App\Modules\ArmaLife\Repositories\Eloquent;
 
+use App\Modules\ArmaLife\Classes\Helper;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Modules\ArmaLife\Repositories\VehicleRepository as VehicleInterface;
 use App\Modules\ArmaLife\Models\Vehicle;
+
 
 /**
  * Class VehicleRepository
@@ -23,8 +25,6 @@ class VehicleRepository extends BaseRepository implements VehicleInterface
         return Vehicle::class; 
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -36,5 +36,13 @@ class VehicleRepository extends BaseRepository implements VehicleInterface
     public function count()
     {
         return $this->model->count();
+    }
+
+
+
+    public function allDataTable()
+    {
+        $vehicles = $this->model->join('players', 'vehicles.pid', '=', 'players.playerid')->select('id', 'players.name', 'pid', 'classname', 'side', 'plate', 'active', 'alive')->get();
+        return Helper::buildTable($vehicles);
     }
 }

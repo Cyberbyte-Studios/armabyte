@@ -9,9 +9,10 @@
     @include('templates.life-sidebar')
 
     <div class="content-wrapper" id="app">
-        @yield('content')
-    </div>
+        <section class="content-header">@yield('content-header')</section>
+        <section class="content">@yield('content')</section>
 
+    </div>
     @include('templates.footer')
 
     @include('templates.right-sidebar')
@@ -20,5 +21,6 @@
 </div>
 
 <script src="{{ elixir('js/app.js') }}"></script>
+@stack('scripts')
 </body>
 </html>
