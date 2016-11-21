@@ -4,6 +4,9 @@ namespace App\Modules\ArmaLife\Services;
 
 class ArrayParser
 {
+    
+    private const array_pattern_3d = '/\[([^,]*),([^,]*),([^,\]]*)]/';
+    
     public static function decode($array)
     {
         $result = $array;
@@ -24,7 +27,7 @@ class ArrayParser
         // }
         // return false;
         
-        if ($items == '"[]"' && $items == '' && $items == null) {
+        if ($items != '"[]"' && $items != '' && $items != null) {
             return false;
         }
         
@@ -46,7 +49,7 @@ class ArrayParser
     
     public static function stats($stats)
     {
-        preg_match_all('/"\[([^,]*),([^,]*),([^,\]]*)]"/', $stats, $matches);
+        preg_match_all(self::array_pattern_3d, $stats, $matches);
         if (count($matches, COUNT_RECURSIVE) !== 8) {
             return false;
         }
@@ -60,7 +63,7 @@ class ArrayParser
     
     public static function time($time)
     {
-        preg_match_all('/"\[([^,]*),([^,]*),([^,\]]*)]"/', $time, $matches);
+        preg_match_all(self::array_pattern_3d, $time, $matches);
         if (count($matches, COUNT_RECURSIVE) !== 8) {
             return false;
         }
@@ -74,7 +77,7 @@ class ArrayParser
     
     public static function position($position)
     {
-        preg_match_all('/\[([^,]*),([^,]*),([^,\]]*)]/', $position, $matches);
+        preg_match_all(self::array_pattern_3d, $position, $matches);
         
         if (count($matches, COUNT_RECURSIVE) !== 8) { // If match has 3 results it will be 8
             return false;
