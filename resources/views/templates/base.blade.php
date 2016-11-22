@@ -4,14 +4,13 @@
     @include('templates.head')
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" id="app">
     @include('templates.header')
     @include('templates.life-sidebar')
 
     <div class="content-wrapper" id="app">
         <section class="content-header">@yield('content-header')</section>
         <section class="content">@yield('content')</section>
-
     </div>
     @include('templates.footer')
 

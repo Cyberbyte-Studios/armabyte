@@ -15,6 +15,6 @@
 
 <script>
     window.Cyberworks = {!! json_encode([
-        'csrfToken' => csrf_token(),
+        'csrfToken' => csrf_token()
     ]); !!}
 </script>

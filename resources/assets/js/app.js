@@ -15,6 +15,16 @@ require('./bootstrap');
 
 
 Vue.component(
+    'messages',
+    require('./components/notifcations/Notifications.vue')
+);
+
+Vue.component(
+    'audits',
+    require('./components/notifcations/Audits.vue')
+);
+
+Vue.component(
     'passport-clients',
     require('./components/passport/Clients.vue')
 );

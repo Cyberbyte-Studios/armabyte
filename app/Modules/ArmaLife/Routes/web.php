@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/vehicles', function() {
    return view("armalife::vehicles");
 });
@@ -18,3 +19,4 @@ Route::get('/vehicles', function() {
 Route::get('/players', function() {
     return view("armalife::players");
 });
+

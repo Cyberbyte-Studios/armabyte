@@ -2,15 +2,11 @@
 
 namespace App\Modules\ArmaLife\Repositories;
 
-use Prettus\Repository\Contracts\RepositoryInterface;
-
 /**
  * Interface VehicleRepository
  * @package namespace App\Modules\ArmaLife\Repositories;
  */
-interface VehicleRepository extends RepositoryInterface
+interface VehicleRepository extends ArmaLifeRepository
 {
-    public function count();
-
     public function allDataTable();
 }

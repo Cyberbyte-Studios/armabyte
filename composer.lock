@@ -4,8 +4,13 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "10fe6885243388c7adb81f67cac8f57b",
     "content-hash": "13a62e72e810aab5ead43910b0a4a976",
+=======
+    "hash": "c88a98ea98cc6f249a83b5dba1f04989",
+    "content-hash": "734536c0e73a49326034c9b7b6699fad",
+>>>>>>> develop
     "packages": [
         {
             "name": "caffeinated/modules",
@@ -2113,6 +2118,7 @@
             "time": "2016-11-07 23:38:38"
         },
         {
+<<<<<<< HEAD
             "name": "phenx/php-font-lib",
             "version": "0.2.2",
             "source": {
@@ -2147,6 +2153,8 @@
             "time": "2014-02-01 15:22:28"
         },
         {
+=======
+>>>>>>> develop
             "name": "phing/phing",
             "version": "2.15.2",
             "source": {
@@ -2240,6 +2248,7 @@
             "time": "2016-10-13 09:01:45"
         },
         {
+<<<<<<< HEAD
             "name": "phpoffice/phpexcel",
             "version": "1.8.1",
             "source": {
@@ -2297,6 +2306,8 @@
             "time": "2015-05-01 07:00:55"
         },
         {
+=======
+>>>>>>> develop
             "name": "phpseclib/phpseclib",
             "version": "2.0.4",
             "source": {

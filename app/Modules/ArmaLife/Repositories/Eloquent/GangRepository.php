@@ -2,7 +2,6 @@
 
 namespace App\Modules\ArmaLife\Repositories\Eloquent;
 
-use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Modules\ArmaLife\Repositories\GangRepository as GangInterface;
 use App\Modules\ArmaLife\Models\Gang;
@@ -11,7 +10,7 @@ use App\Modules\ArmaLife\Models\Gang;
  * Class GangRepository
  * @package namespace App\Modules\ArmaLife\Repositories\Eloquent;
  */
-class GangRepository extends BaseRepository implements GangInterface
+class GangRepository extends ArmaLifeRepository implements GangInterface
 {
     /**
      * Specify Model class name
@@ -23,8 +22,6 @@ class GangRepository extends BaseRepository implements GangInterface
         return Gang::class; 
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -32,7 +29,6 @@ class GangRepository extends BaseRepository implements GangInterface
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-
 
     public function allDataTable()
     {

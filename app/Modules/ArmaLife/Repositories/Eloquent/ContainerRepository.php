@@ -2,7 +2,6 @@
 
 namespace App\Modules\ArmaLife\Repositories\Eloquent;
 
-use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Modules\ArmaLife\Repositories\ContainerRepository as ContainerInterface;
 use App\Modules\ArmaLife\Models\Container;
@@ -11,7 +10,8 @@ use App\Modules\ArmaLife\Models\Container;
  * Class ContainerRepository
  * @package namespace App\Modules\ArmaLife\Repositories\Eloquent;
  */
-class ContainerRepository extends BaseRepository implements ContainerInterface
+class ContainerRepository extends ArmaLifeRepository implements ContainerInterface
+
 {
     /**
      * Specify Model class name
@@ -21,9 +21,7 @@ class ContainerRepository extends BaseRepository implements ContainerInterface
     public function model()
     {
         return Container::class; 
-    }
-
-    
+    }   
 
     /**
      * Boot up the repository, pushing criteria

@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 //, 'middleware' => 'auth:api'
 Route::group(['prefix' => 'armalife'], function() {
     Route::get('dashboard', 'ArmaLifeController@dashboard');
+    Route::get('player/audit', 'PlayerController@audits');
+    Route::get('player/audit/{id}', 'PlayerController@audit');
     Route::resource('player', PlayerController::class);
     Route::resource('vehicle', VehicleController::class);
     Route::resource('house', HouseController::class);
@@ -29,4 +31,5 @@ Route::group(['prefix' => 'armalife'], function() {
         Route::get('gangs', 'GangController@all');
         Route::get('crimes', 'WantedController@all');
     });
+
 });
