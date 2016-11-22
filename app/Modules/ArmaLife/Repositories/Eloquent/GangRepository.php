@@ -32,4 +32,10 @@ class GangRepository extends BaseRepository implements GangInterface
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+
+    public function allDataTable()
+    {
+        // TODO: Implement allDataTable() method.
+    }
 }

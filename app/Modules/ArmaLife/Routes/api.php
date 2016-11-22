@@ -24,5 +24,9 @@ Route::group(['prefix' => 'armalife'], function() {
     Route::group(['prefix' => 'datatable'], function () {
         Route::get('players', 'PlayerController@all');
         Route::get('vehicles', 'VehicleController@all');
+        Route::get('houses', 'HouseController@all');
+        Route::get('containers', 'ContainerController@all');
+        Route::get('gangs', 'GangController@all');
+        Route::get('crimes', 'WantedController@all');
     });
 });

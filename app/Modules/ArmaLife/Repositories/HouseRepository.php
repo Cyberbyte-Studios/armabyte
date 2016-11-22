@@ -11,4 +11,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface HouseRepository extends RepositoryInterface
 {
     public function count();
+
+    public function allDataTable();
 }

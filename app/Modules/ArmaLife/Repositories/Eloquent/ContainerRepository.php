@@ -32,4 +32,9 @@ class ContainerRepository extends BaseRepository implements ContainerInterface
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function allDataTable()
+    {
+        // TODO: Implement allDataTable() method.
+    }
 }

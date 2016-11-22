@@ -32,4 +32,10 @@ class WantedRepository extends BaseRepository implements WantedInterface
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+
+    public function allDataTable()
+    {
+        // TODO: Implement allDataTable() method.
+    }
 }

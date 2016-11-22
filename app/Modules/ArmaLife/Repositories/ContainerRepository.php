@@ -10,5 +10,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface ContainerRepository extends RepositoryInterface
 {
-
+    public function allDataTable();
 }

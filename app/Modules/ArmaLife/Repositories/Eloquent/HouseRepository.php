@@ -40,5 +40,11 @@ class HouseRepository extends BaseRepository implements HouseInterface
     public function count()
     {
         return $this->model->count();
-    }    
+    }
+
+
+    public function allDataTable()
+    {
+        // TODO: Implement allDataTable() method.
+    }
 }
