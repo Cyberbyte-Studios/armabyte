@@ -13,4 +13,9 @@ class ContainerController
     {
         $this->repository = $repository;
     }
+
+    public function all()
+    {
+        return $this->repository->allDataTable();
+    }
 }

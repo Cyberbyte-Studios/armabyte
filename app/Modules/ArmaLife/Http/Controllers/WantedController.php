@@ -13,4 +13,9 @@ class WantedController
     {
         $this->repository = $repository;
     }
+
+    public function all()
+    {
+        return $this->repository->allDataTable();
+    }
 }

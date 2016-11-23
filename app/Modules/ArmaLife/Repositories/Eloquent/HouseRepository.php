@@ -36,14 +36,9 @@ class HouseRepository extends ArmaLifeRepository implements HouseInterface
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function count()
-    {
-        return $this->model->count();
-    }
-
-
     public function allDataTable()
     {
-        // TODO: Implement allDataTable() method.
+        $houses = $this->model->join('players', 'houses.pid', '=', 'players.playerid')->select('id', 'players.name',  'pos', 'owned', 'garage')->get();
+        return Helper::buildTable($houses);
     }
 }
