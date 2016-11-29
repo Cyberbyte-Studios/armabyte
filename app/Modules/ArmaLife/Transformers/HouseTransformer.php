@@ -21,10 +21,11 @@ class HouseTransformer extends TransformerAbstract
      */
     public function transform(House $model)
     {
+        $arrayParser = new ArrayParser();
         return [
             'id' => (int) $model->id,
             'pid' => $model->pid,
-            'pos' => ArrayParser::position($model->pos),
+            'pos' => $arrayParser->position($model->pos),
             'owned' => $model->owned,
             'insert_time' => $model->insert_time
         ];

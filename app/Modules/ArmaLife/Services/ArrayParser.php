@@ -4,9 +4,13 @@ namespace App\Modules\ArmaLife\Services;
 
 class ArrayParser
 {
-    private $armaLifeArray = '/\[([^,]*),([^,]*),([^,\]]*)]/';
+    private $armaLifeArray = '/(?:[^`"\[\],\n]+)/';
     private $licenceArray = '/\[`([^`]*)`,([01])]/';
 
+    /**
+     * @deprecated This is old, ugly and untested code...
+     * @todo cleanup regex parsing
+     */
     public function inventory($items)
     {
         if ($this->isEmpty($items)) {
@@ -29,6 +33,10 @@ class ArrayParser
         return $parsedInventory;
     }
 
+    /**
+     * @deprecated This is old, ugly and untested code...
+     * @todo cleanup regex parsing
+     */
     public function licences($licences)
     {
         if ($this->isEmpty($licences)) {
@@ -70,23 +78,22 @@ class ArrayParser
         return $matches[1];
     }
 
-    private function parseThreeWayArray(string $array, array $keys)
+    public function parseThreeWayArray(string $array, array $keys = [])
     {
         if ($this->isEmpty($array)) {
             return false;
         }
 
         preg_match_all($this->armaLifeArray, $array, $matches);
+        $firstCapture = $matches[0];
 
-        if (count($matches, COUNT_RECURSIVE) !== 8) {
-            return false;
+        if (count($keys) === count($firstCapture)) {
+            return array_combine($keys, $firstCapture);
         }
-
-        unset($matches[0]);
-        return array_combine($keys, array_column($matches, 0));
+        return $firstCapture;
     }
 
-    private function isEmpty(string $armaArray): bool
+    public function isEmpty($armaArray): bool
     {
         if (empty($armaArray) || $armaArray === '"[]"') {
             return true;
