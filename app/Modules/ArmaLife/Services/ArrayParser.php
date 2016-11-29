@@ -4,30 +4,12 @@ namespace App\Modules\ArmaLife\Services;
 
 class ArrayParser
 {
-    
-    private const arrayPattern3D = '/\[([^,]*),([^,]*),([^,\]]*)]/';
-    
-    public static function decode($array)
+    private $armaLifeArray = '/\[([^,]*),([^,]*),([^,\]]*)]/';
+    private $licenceArray = '/\[`([^`]*)`,([01])]/';
+
+    public function inventory($items)
     {
-        $result = $array;
-        return $result;
-    }
-    
-    // todo: cleanup legacy code
-    public static function inventory($items)
-    {
-        // if ($items != '"[]"' && $items != '' && $items != null) {
-        //     preg_match_all("/`([^`]*)`/", $items, $matches);
-        //     $allItems = array_count_values($matches[1]);
-        //     unset($allItems['']);
-        //     foreach ($allItems as $item => $count) {
-        //         $inventory[trans('item.'.$item)] = $count;
-        //     }
-        //     return $inventory;
-        // }
-        // return false;
-        
-        if ($items != '"[]"' && $items != '' && $items != null) {
+        if ($this->isEmpty($items)) {
             return false;
         }
         
@@ -46,65 +28,16 @@ class ArrayParser
 
         return $parsedInventory;
     }
-    
-    public static function stats($stats)
+
+    public function licences($licences)
     {
-        preg_match_all(self::arrayPattern3D, $stats, $matches);
-        if (count($matches, COUNT_RECURSIVE) !== 8) {
+        if ($this->isEmpty($licences)) {
             return false;
         }
-        
-        return [
-            'health' => $matches[1][0],
-            'water' => $matches[2][0],
-            'stamina' => $matches[3][0]
-        ];
-    }
-    
-    public static function time($time)
-    {
-        preg_match_all(self::arrayPattern3D, $time, $matches);
-        if (count($matches, COUNT_RECURSIVE) !== 8) {
-            return false;
-        }
-        
-        return [
-            'cop' => $matches[1][0],
-            'med' => $matches[2][0],
-            'civ' => $matches[3][0]
-        ];
-    }
-    
-    public static function position($position)
-    {
-        preg_match_all(self::arrayPattern3D, $position, $matches);
-        
-        if (count($matches, COUNT_RECURSIVE) !== 8) { // If match has 3 results it will be 8
-            return false;
-        }
-        
-        return [
-            'x' => $matches[1][0],
-            'y' => $matches[2][0],
-            'z' => $matches[3][0]
-        ];
-    }
-    
-    public static function aliases($aliases)
-    {
-        preg_match_all("/`([^`]*)`/", $aliases, $matches);
-        return $matches[1];
-    }
-    
-    public static function licences($licences)
-    {
-        if ($licences == '"[]"' && $licences == '' && $licences == null) {
-            return false;
-        }
-        
-        preg_match_all("/\[`([^`]*)`,([01])]/", $licences, $matches);
+
+        preg_match_all($this->licenceArray, $licences, $matches);
         $parsedLicences = false;
-        
+
         foreach ($matches[1] as $key => $name) {
             $parsedLicences[$key] = [
                 'id' => $name,
@@ -114,5 +47,50 @@ class ArrayParser
         }
 
         return $parsedLicences;
+    }
+    
+    public function stats(string $stats): array
+    {
+        return $this->parseThreeWayArray($stats, ['health', 'water', 'stamina']);
+    }
+    
+    public function time(string $time): array
+    {
+        return $this->parseThreeWayArray($time, ['cop', 'med', 'civ']);
+    }
+    
+    public function position(string $position): array
+    {
+        return $this->parseThreeWayArray($position, ['x', 'y', 'z']);
+    }
+    
+    public function aliases($aliases)
+    {
+        preg_match_all("/`([^`]*)`/", $aliases, $matches);
+        return $matches[1];
+    }
+
+    private function parseThreeWayArray(string $array, array $keys)
+    {
+        if ($this->isEmpty($array)) {
+            return false;
+        }
+
+        preg_match_all($this->armaLifeArray, $array, $matches);
+
+        if (count($matches, COUNT_RECURSIVE) !== 8) {
+            return false;
+        }
+
+        unset($matches[0]);
+        return array_combine($keys, array_column($matches, 0));
+    }
+
+    private function isEmpty(string $armaArray): bool
+    {
+        if (empty($armaArray) || $armaArray === '"[]"') {
+            return true;
+        }
+        return false;
     }
 }
