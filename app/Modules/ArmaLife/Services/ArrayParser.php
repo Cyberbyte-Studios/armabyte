@@ -59,26 +59,25 @@ class ArrayParser
     
     public function stats(string $stats): array
     {
-        return $this->parseThreeWayArray($stats, ['health', 'water', 'stamina']);
+        return $this->parseArmaLifeArray($stats, ['health', 'water', 'stamina']);
     }
     
     public function time(string $time): array
     {
-        return $this->parseThreeWayArray($time, ['cop', 'med', 'civ']);
+        return $this->parseArmaLifeArray($time, ['cop', 'med', 'civ']);
     }
     
     public function position(string $position): array
     {
-        return $this->parseThreeWayArray($position, ['x', 'y', 'z']);
+        return $this->parseArmaLifeArray($position, ['x', 'y', 'z']);
     }
     
     public function aliases($aliases)
     {
-        preg_match_all("/`([^`]*)`/", $aliases, $matches);
-        return $matches[1];
+        return $this->parseArmaLifeArray($aliases);
     }
 
-    public function parseThreeWayArray(string $array, array $keys = [])
+    public function parseArmaLifeArray(string $array, array $keys = [])
     {
         if ($this->isEmpty($array)) {
             return false;

@@ -19,35 +19,28 @@ class ArrayParserTest extends TestCase
     public function testNormalAliases()
     {
         $aliases = $this->arrayParser->aliases('"[`Homer Simpson`]"');
-        $this->assertEquals(1, count($aliases), 'Not enough aliases where given');
-        $this->assertEquals('Homer Simpson', $aliases[0]);
+        $this->assertSame(['Homer Simpson'], $aliases);
     }
 
     public function testUnicodeAliases()
     {
         $aliases = $this->arrayParser->aliases('"[`Mr ☃ likes snow`]"');
-        $this->assertEquals(1, count($aliases), 'Not enough aliases where given');
-        $this->assertEquals('Mr ☃ likes snow', $aliases[0]);
+        $this->assertSame(['Mr ☃ likes snow'], $aliases);
     }
 
     public function testMultipleAliases()
     {
         $aliases = $this->arrayParser->aliases('"[`Mr cyberworks`],[`Mr broke cyberworks`]"');
-        $this->assertEquals(2, count($aliases), 'Not enough aliases where given');
-        $this->assertEquals('Mr cyberworks', $aliases[0]);
-        $this->assertEquals('Mr broke cyberworks', $aliases[1]);
+        $this->assertSame(['Mr cyberworks', 'Mr broke cyberworks'], $aliases);
     }
 
     public function testBrokenAliases()
     {
         $aliases = $this->arrayParser->aliases('"[`Mr snowman` broke cyberworks`]"');
-        $this->assertEquals(1, count($aliases), 'Not enough aliases where given');
-        $this->assertEquals('Mr snowman', $aliases[0]);
+        $this->assertSame(['Mr snowman', ' broke cyberworks'], $aliases);
 
         $aliases = $this->arrayParser->aliases('"[`Mr snowman` broke `cyberworks`]"');
-        $this->assertEquals(2, count($aliases), 'Not enough aliases where given');
-        $this->assertEquals('Mr snowman', $aliases[0]);
-        $this->assertEquals('cyberworks', $aliases[1]);
+        $this->assertSame(['Mr snowman', ' broke ', 'cyberworks'], $aliases);
     }
 
     public function testPositionParsing()
@@ -86,5 +79,11 @@ class ArrayParserTest extends TestCase
         $this->assertTrue($this->arrayParser->isEmpty(''));
         $this->assertTrue($this->arrayParser->isEmpty(null));
         $this->assertFalse($this->arrayParser->isEmpty('"[312]"'));
+    }
+
+    public function testNewArray()
+    {
+        $aliases = $this->arrayParser->aliases('["Mr snowman"]');
+        $this->assertSame(['Mr snowman'], $aliases);
     }
 }
