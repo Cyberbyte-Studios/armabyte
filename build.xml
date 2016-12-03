@@ -28,7 +28,7 @@
     <target name="bundle">
         <echo msg="Optimizing Bundle" />
 
-        <exec command="gulp" passthru="true" />
+        <exec command="node_modules/gulp/bin/gulp.js" passthru="true" />
         <exec command="php artisan clear-compiled" passthru="true" />
         <exec command="php artisan route:cache" passthru="true" />
         <exec command="php artisan passport:install" passthru="true" />
