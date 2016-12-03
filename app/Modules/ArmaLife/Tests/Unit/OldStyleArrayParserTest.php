@@ -2,10 +2,10 @@
 
 namespace App\Modules\ArmaLife\Tests\Unit;
 
-use App\Modules\ArmaLife\Services\ArrayParser;
 use Tests\TestCase;
+use App\Modules\ArmaLife\Services\ArrayParser;
 
-class ArrayParserTest extends TestCase
+class OldStyleArrayParserTest extends TestCase
 {
     /** @var ArrayParser $arrayParser */
     protected $arrayParser;
@@ -81,9 +81,38 @@ class ArrayParserTest extends TestCase
         $this->assertFalse($this->arrayParser->isEmpty('"[312]"'));
     }
 
-    public function testNewArray()
+    public function testLicenseParsing()
     {
-        $aliases = $this->arrayParser->aliases('["Mr snowman"]');
-        $this->assertSame(['Mr snowman'], $aliases);
+        $licences = $this->arrayParser->licences(
+            '"[[`license_civ_driver`,1],[`license_civ_air`,0],[`license_civ_oil`,0]]"'
+        );
+        $this->assertNotFalse($licences);
+        $this->assertEquals(3, count($licences));
+        $this->assertSame([
+            'id' => 'license_civ_driver',
+            'name' => 'license.license_civ_driver',
+            'status' => 1
+        ], $licences[0]);
+    }
+
+    public function testInventoryParsing()
+    {
+        $testString = "[`U_Rangemaster`,`V_TacVest_blk_POLICE`],``,`hgun_P07_snds_F`,[],[`30Rnd_9x21_Mag`]," .
+            "[`Medikit`],[],[],[`30Rnd_9x21_Mag`,`30Rnd_9x21_Mag`],[``,``,``,``],[`muzzle_snds_L`,``,``,``]," .
+            "[`life_inv_donuts`,`life_inv_handcuffkeys`]]";
+        $inventory = $this->arrayParser->inventory($testString);
+        $this->assertNotFalse($inventory);
+        $this->assertEquals(8, count($inventory));
+        $this->assertSame([
+            'id' => 'U_Rangemaster',
+            'name' => 'item.U_Rangemaster',
+            'count' => 1
+        ], $inventory[0]);
+
+        $this->assertSame([
+            'id' => '30Rnd_9x21_Mag',
+            'name' => 'item.30Rnd_9x21_Mag',
+            'count' => 3
+        ], $inventory[3]);
     }
 }

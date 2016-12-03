@@ -5,57 +5,8 @@ namespace App\Modules\ArmaLife\Services;
 class ArrayParser
 {
     private $armaLifeArray = '/(?:[^`"\[\],\n]+)/';
-    private $licenceArray = '/\[`([^`]*)`,([01])]/';
-
-    /**
-     * @deprecated This is old, ugly and untested code...
-     * @todo cleanup regex parsing
-     */
-    public function inventory($items)
-    {
-        if ($this->isEmpty($items)) {
-            return false;
-        }
-        
-        preg_match_all("/`([^`]*)`/", $items, $matches);
-        $allItems = array_count_values($matches[1]);
-        
-        $parsedInventory = [];
-        unset($allItems['']);
-        foreach ($allItems as $key => $count) {
-            array_push($parsedInventory, [
-                'id' => $key,
-                'name' => trans('item.'.$key),
-                'count' => $count
-            ]);
-        }
-
-        return $parsedInventory;
-    }
-
-    /**
-     * @deprecated This is old, ugly and untested code...
-     * @todo cleanup regex parsing
-     */
-    public function licences($licences)
-    {
-        if ($this->isEmpty($licences)) {
-            return false;
-        }
-
-        preg_match_all($this->licenceArray, $licences, $matches);
-        $parsedLicences = false;
-
-        foreach ($matches[1] as $key => $name) {
-            $parsedLicences[$key] = [
-                'id' => $name,
-                'name' => trans('license.'.$name),
-                'status' => (int) $matches[2][$key]
-            ];
-        }
-
-        return $parsedLicences;
-    }
+    private $licenceArray = '/\[[`"]([^`"]*)[`"],([01])]/';
+    private $inventoryArray = '/`([^`]*)`/';
     
     public function stats(string $stats): array
     {
@@ -77,7 +28,49 @@ class ArrayParser
         return $this->parseArmaLifeArray($aliases);
     }
 
-    public function parseArmaLifeArray(string $array, array $keys = [])
+    public function inventory($items)
+    {
+        if ($this->isEmpty($items)) {
+            return false;
+        }
+
+        preg_match_all($this->inventoryArray, $items, $matches);
+        $allItems = array_count_values($matches[1]);
+
+        $parsedInventory = [];
+        unset($allItems['']);
+        foreach ($allItems as $key => $count) {
+            array_push($parsedInventory, [
+                'id' => $key,
+                'name' => trans('item.'.$key),
+                'count' => $count
+            ]);
+        }
+
+        return $parsedInventory;
+    }
+
+    public function licences($licences)
+    {
+        if ($this->isEmpty($licences)) {
+            return false;
+        }
+
+        preg_match_all($this->licenceArray, $licences, $matches);
+        $parsedLicences = false;
+
+        foreach ($matches[1] as $key => $name) {
+            $parsedLicences[$key] = [
+                'id' => $name,
+                'name' => trans('license.'.$name),
+                'status' => (int) $matches[2][$key]
+            ];
+        }
+
+        return $parsedLicences;
+    }
+
+    protected function parseArmaLifeArray(string $array, array $keys = [])
     {
         if ($this->isEmpty($array)) {
             return false;
