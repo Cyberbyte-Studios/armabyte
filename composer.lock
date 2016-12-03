@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c88a98ea98cc6f249a83b5dba1f04989",
-    "content-hash": "734536c0e73a49326034c9b7b6699fad",
+    "hash": "93bd56229bf8275c03a232f5195873f1",
+    "content-hash": "9eb5dde9bc56fd8fb4203f4f31f72b01",
     "packages": [
         {
             "name": "caffeinated/modules",
@@ -1834,6 +1834,54 @@
                 "php"
             ],
             "time": "2016-09-16 12:04:44"
+        },
+        {
+            "name": "nizarii/arma-rcon-class",
+            "version": "2.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Nizarii/arma-rcon-class-php.git",
+                "reference": "46b7e59c3d812d55793c014ccb7e191c439c0524"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Nizarii/arma-rcon-class-php/zipball/46b7e59c3d812d55793c014ccb7e191c439c0524",
+                "reference": "46b7e59c3d812d55793c014ccb7e191c439c0524",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "arc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Felix Schäfer",
+                    "email": "nizari@starwolf-dev.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "ARC allows you connecting and sending commands easily to your BattlEye server",
+            "homepage": "https://github.com/Nizarii/arma-rcon-class-php/",
+            "keywords": [
+                "arma2",
+                "arma3",
+                "battleye",
+                "class",
+                "client",
+                "dayz",
+                "lightweight",
+                "rcon"
+            ],
+            "time": "2016-08-02 07:46:53"
         },
         {
             "name": "owen-it/laravel-auditing",
