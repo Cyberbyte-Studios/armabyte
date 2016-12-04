@@ -172,6 +172,7 @@ return [
         Caffeinated\Modules\ModulesServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
         /*
          * Application Service Providers...
