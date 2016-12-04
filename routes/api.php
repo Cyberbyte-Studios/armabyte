@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 */
 
 
+Route::get('user', 'Api\AuthController@user');
+Route::get('userinfo', 'Api\AuthController@userInfo');
 Route::get('audit', 'Api\NotificationController@audits');
 Route::get('notifications', 'Api\NotificationController@notifications');
 Route::get('notifications/read', 'Api\NotificationController@notificationsRead');
